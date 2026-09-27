@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudIQ - Royal Learning Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --royal-purple: #7851a9;
+            --royal-blue: #4169e1;
+            --royal-gold: #ffd700;
+            --royal-red: #c41e3a;
+            --royal-green: #2e8b57;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Crowns */
+        .floating-crown {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--royal-gold);
+            opacity: 0.7;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: floatCrown 20s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatCrown {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(10px) translateX(-30px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-10px) rotate(3deg);
+            }
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--royal-gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s infinite;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .login-logo h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red), var(--royal-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .login-logo p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .user-type-selector {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-type {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-type.active {
+            background: var(--royal-gold);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .user-type:not(.active):hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--royal-gold);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            color: var(--royal-gold);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red));
+            color: var(--dark-bg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #ffed4e, #d62839);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--text-muted);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .social-btn.apple {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: var(--royal-gold);
+            text-decoration: none;
+        }
+
+        .default-accounts {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .default-accounts h3 {
+            color: var(--royal-gold);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .account-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .show-creds {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .show-creds-btn {
+            background: none;
+            border: none;
+            color: var(--royal-gold);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .show-creds-btn:hover {
+            color: var(--royal-red);
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            position: absolute;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .interactive-element:hover {
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .login-logo h1 {
+                font-size: 3rem;
+            }
+            
+            .user-type-selector {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation" id="background-animation"></div>
+    
+    <!-- Floating Crowns -->
+    <div class="floating-crown" style="top: 10%; left: 10%; animation-delay: 0s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="top: 20%; right: 15%; animation-delay: 2s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 30%; left: 15%; animation-delay: 4s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 20%; right: 10%; animation-delay: 6s;"><i class="fas fa-crown"></i></div>
+    
+    <!-- Interactive Elements -->
+    <div class="interactive-element" style="top: 15%; left: 5%; font-size: 2rem; color: var(--royal-blue);"><i class="fas fa-book"></i></div>
+    <div class="interactive-element" style="top: 25%; right: 5%; font-size: 2rem; color: var(--royal-red);"><i class="fas fa-graduation-cap"></i></div>
+    <div class="interactive-element" style="bottom: 25%; left: 5%; font-size: 2rem; color: var(--royal-green);"><i class="fas fa-lightbulb"></i></div>
+    <div class="interactive-element" style="bottom: 15%; right: 5%; font-size: 2rem; color: var(--royal-purple);"><i class="fas fa-rocket"></i></div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-logo">
+            <h1>StudIQ</h1>
+            <p>Royal Gamified Learning Platform</p>
+        </div>
+        
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: var(--royal-gold);">Create an account</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted);">
+                Enter your email to sign up for this app
+            </p>
+
+            <div class="user-type-selector">
+                <div class="user-type active" id="student-type">Student</div>
+                <div class="user-type" id="teacher-type">Teacher</div>
+                <div class="user-type" id="admin-type">Admin</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email" placeholder="email@domain.com">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            
+            <button class="btn-login" id="login-btn">Continue</button>
+            
+            <div class="divider">
+                <span>Or</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+                <button class="social-btn apple">
+                    <i class="fab fa-apple"></i>
+                    Continue with Apple
+                </button>
+            </div>
+            
+            <div class="terms">
+                By clicking continue, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </div>
+
+            <div class="show-creds">
+                <button class="show-creds-btn" id="show-creds-btn">Show Demo Credentials</button>
+            </div>
+
+            <div class="default-accounts" id="default-accounts">
+                <h3>Demo Login Credentials:</h3>
+                <div class="account-info">
+                    <span>Student:</span>
+                    <span>student@studiq.com</span>
+                </div>
+                <div class="account-info">
+                    <span>Teacher:</span>
+                    <span>teacher@studiq.com</span>
+                </div>
+                <div class="account-info">
+                    <span>Admin:</span>
+                    <span>admin@studiq.com</span>
+                </div>
+                <div class="account-info">
+                    <span>Password for all:</span>
+                    <span>Password123</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const studentType = document.getElementById('student-type');
+        const teacherType = document.getElementById('teacher-type');
+        const adminType = document.getElementById('admin-type');
+        const loginBtn = document.getElementById('login-btn');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const showCredsBtn = document.getElementById('show-creds-btn');
+        const defaultAccounts = document.getElementById('default-accounts');
+        const backgroundAnimation = document.getElementById('background-animation');
+
+        // Default credentials
+        const teacherEmail = 'teacher@studiq.com';
+        const studentEmail = 'student@studiq.com';
+        const adminEmail = 'admin@studiq.com';
+        const defaultPassword = 'Password123';
+
+        // Create animated particles
+        function createParticles() {
+            const colors = [
+                'var(--royal-purple)', 
+                'var(--royal-blue)', 
+                'var(--royal-gold)', 
+                'var(--royal-red)', 
+                'var(--royal-green)'
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 20 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Apply styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = color;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                
+                backgroundAnimation.appendChild(particle);
+            }
+        }
+
+        // Set active user type
+        function setActiveUserType(type) {
+            studentType.classList.remove('active');
+            teacherType.classList.remove('active');
+            adminType.classList.remove('active');
+            
+            if (type === 'student') {
+                studentType.classList.add('active');
+                emailInput.placeholder = studentEmail;
+            } else if (type === 'teacher') {
+                teacherType.classList.add('active');
+                emailInput.placeholder = teacherEmail;
+            } else {
+                adminType.classList.add('active');
+                emailInput.placeholder = adminEmail;
+            }
+        }
+
+        // Event listeners for user type selection
+        studentType.addEventListener('click', () => setActiveUserType('student'));
+        teacherType.addEventListener('click', () => setActiveUserType('teacher'));
+        adminType.addEventListener('click', () => setActiveUserType('admin'));
+
+        // Show credentials button
+        showCredsBtn.addEventListener('click', () => {
+            defaultAccounts.style.display = 'block';
+            showCredsBtn.style.display = 'none';
+        });
+
+        // Login functionality
+        loginBtn.addEventListener('click', () => {
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value.trim();
+            const isStudent = studentType.classList.contains('active');
+            const isTeacher = teacherType.classList.contains('active');
+            const isAdmin = adminType.classList.contains('active');
+            
+            // Check if using default credentials or a valid email format
+            if ((email === teacherEmail || email === studentEmail || email === adminEmail || email.includes('@')) && 
+                (password === defaultPassword || password.length >= 6)) {
+                
+                // Determine user type for welcome message
+                let userType = "Learner";
+                if (email === teacherEmail || isTeacher) userType = "Teacher";
+                if (email === adminEmail || isAdmin) userType = "Administrator";
+                
+                alert(`Welcome, ${userType}! You have successfully logged in.`);
+                
+            } else {
+                if (password.length < 6) {
+                    alert('Password must be at least 6 characters long');
+                    passwordInput.focus();
+                } else {
+                    alert('Please enter a valid email address and password');
+                    emailInput.focus();
+                }
+            }
+        });
+
+        // Initialize with student as default
+        setActiveUserType('student');
+        
+        // Create background particles
+        createParticles();
+    </script>
+</body>
+</html>

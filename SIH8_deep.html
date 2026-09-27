@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudIQ - Royal Gamified Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --royal-purple: #7851a9;
+            --royal-blue: #4169e1;
+            --royal-gold: #ffd700;
+            --royal-red: #c41e3a;
+            --royal-green: #2e8b57;
+            --royal-pink: #ff4d8d;
+            --royal-cyan: #00ffff;
+            --royal-orange: #ff8c00;
+            --royal-teal: #20b2aa;
+            --royal-lavender: #e6e6fa;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Enhanced Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Floating Crowns */
+        .floating-crown {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--royal-gold);
+            opacity: 0.7;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            animation: floatCrown 20s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatCrown {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) translateX(40px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(20px) translateX(-40px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-40px) translateX(-15px) rotate(3deg);
+            }
+        }
+
+        /* New Floating Gems */
+        .floating-gem {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatGem 25s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatGem {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px) rotate(90deg) scale(1.2);
+            }
+           50% {
+                transform: translateY(30px) translateX(-30px) rotate(180deg) scale(0.8);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-20px) rotate(270deg) scale(1.1);
+            }
+        }
+
+        /* New Floating Books */
+        .floating-book {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatBook 30s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatBook {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-50px) translateX(40px) rotate(5deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(40px) translateX(-40px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-25px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        /* New Floating Animals */
+        .floating-animal {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatAnimal 35s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatAnimal {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-60px) translateX(50px) rotate(5deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(50px) translateX(-50px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-40px) translateX(-30px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        /* New Floating Trees */
+        .floating-tree {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatTree 40s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatTree {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px) rotate(3deg) scale(1.05);
+            }
+            50% {
+                transform: translateY(30px) translateX(-30px) rotate(-3deg) scale(0.95);
+            }
+            75% {
+                transform: translateY(-20px) translateX(-20px) rotate(2deg) scale(1.02);
+            }
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            position: absolute;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            animation: bounce 0.5s infinite alternate;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--royal-purple), var(--royal-blue));
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: headerGlow 5s infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% {
+                box-shadow: 0 4px 20px rgba(120, 81, 169, 0.4);
+            }
+            100% {
+                box-shadow: 0 4px 30px rgba(65, 105, 225, 0.6);
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo i {
+            color: var(--royal-gold);
+            animation: spin 10s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--royal-gold);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--royal-purple) 0%, var(--royal-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--royal-gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            animation: containerGlow 3s infinite alternate;
+        }
+
+        @keyframes containerGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 20px 40px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s infinite;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .login-logo h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red), var(--royal-purple), var(--royal-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite, floatTitle 5s infinite ease-in-out;
+        }
+
+        @keyframes floatTitle {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .login-logo p {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            margin-top: 10px;
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .user-type-selector {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-type {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-type.active {
+            background: var(--royal-gold);
+            color: var(--dark-bg);
+            font-weight: 600;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-type:not(.active):hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--royal-gold), inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            color: var(--royal-gold);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red));
+            color: var(--dark-bg);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #ffed4e, #d62839);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
+        }
+
+        @keyframes buttonShine {
+            0% {
+                left: -50%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--text-muted);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--royal-gold), transparent);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal-gold);
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .social-btn.apple {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: var(--royal-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+            color: var(--royal-red);
+        }
+
+        .default-accounts {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid var(--royal-gold);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .default-accounts h3 {
+            color: var(--royal-gold);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .account-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .account-info:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .show-creds {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .show-creds-btn {
+            background: none;
+            border: none;
+            color: var(--royal-gold);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .show-creds-btn:hover {
+            color: var(--royal-red);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Role-specific forms */
+        .role-form {
+            display: none;
+        }
+        
+        .role-form.active {
+            display: block;
+        }
+        
+        .student-fields, .teacher-fields {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content (Hidden until login) */
+        .main-content {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%234169e1" x="0" y="0" width="100" height="100"/><path fill="%237851a9" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>') center/cover;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            animation: floatTitle 5s infinite ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--royal-gold);
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            background: #ffed4e;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--royal-gold);
+            position: relative;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--royal-red);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-gold);
+        }
+
+        .feature-card i {
+            font-size: 3.5rem;
+            color: var(--royal-blue);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--royal-gold);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--royal-gold);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* Subjects Section */
+        .subjects {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subject-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-blue);
+        }
+
+        .subject-icon {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: subjectShine 4s infinite;
+        }
+
+        @keyframes subjectShine {
+            0% {
+                left: -50%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .math {
+            background: linear-gradient(to right, var(--royal-blue), #4a7de5);
+        }
+
+        .science {
+            background: linear-gradient(to right, var(--royal-green), #3da16a);
+        }
+
+        .technology {
+            background: linear-gradient(to right, var(--royal-purple), #8b6bc1);
+        }
+
+        .engineering {
+            background: linear-gradient(to right, var(--royal-red), #d62839);
+        }
+
+        .subject-content {
+            padding: 1.5rem;
+        }
+
+        .subject-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--royal-gold);
+        }
+
+        .subject-card p {
+            color: var(--text-muted);
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-header {
+            background: linear-gradient(to right, var(--royal-purple), var(--royal-blue));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--royal-gold);
+            animation: pulse 3s infinite;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--royal-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: bounce 2s infinite alternate;
+        }
+
+        .level {
+            background: var(--royal-purple);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .xp-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 8px;
+            margin-top: 0.5rem;
+            width: 200px;
+        }
+
+        .xp-fill {
+            background: var(--royal-gold);
+            height: 100%;
+            width: 75%;
+            border-radius: 8px;
+            animation: xpPulse 2s infinite alternate;
+        }
+
+        @keyframes xpPulse {
+            0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+        }
+
+        .coins {
+            font-size: 1rem;
+            color: var(--royal-gold);
+            margin-top: 0.5rem;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-gold);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--royal-gold);
+            border-bottom: 2px solid var(--royal-purple);
+            padding-bottom: 0.5rem;
+        }
+
+        .mission-title {
+            font-size: 1rem;
+            color: var(--royal-blue);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .mission-main {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+        }
+
+        .daily-cards, .badge-cards {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .daily-card, .badge-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            flex: 1;
+            min-width: 140px;
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .daily-card:hover, .badge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--royal-gold);
+        }
+
+        .daily-card i, .badge-card i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--royal-gold);
+            transition: all 0.3s ease;
+        }
+
+        .daily-card:hover i, .badge-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .daily-card strong, .badge-card strong {
+            display: block;
+            margin: 0.5rem 0;
+            color: var(--text-light);
+        }
+
+        .progress-section h3 {
+            margin: 0 0 1rem 0;
+            color: var(--royal-gold);
+        }
+
+        .progress-bar {
+            margin-bottom: 1rem;
+        }
+
+        .progress-label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: var(--royal-blue);
+            border-radius: 8px;
+            animation: fillPulse 2s infinite alternate;
+        }
+
+        @keyframes fillPulse {
+            0% { box-shadow: 0 0 5px rgba(65, 105, 225, 0.5); }
+            100% { box-shadow: 0 0 10px rgba(65, 105, 225, 0.8); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-card);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--royal-gold);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--royal-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        /* New Animations */
+        @keyframes rainbow {
+            0% { color: var(--royal-red); }
+            20% { color: var(--royal-orange); }
+            40% { color: var(--royal-gold); }
+            60% { color: var(--royal-green); }
+            80% { color: var(--royal-blue); }
+            100% { color: var(--royal-purple); }
+        }
+
+        .rainbow-text {
+            animation: rainbow 5s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s infinite ease-in-out;
+        }
+
+        /* Village-themed elements */
+        .village-element {
+            position: absolute;
+            z-index: -1;
+            font-size: 2.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: villageFloat 30s infinite ease-in-out;
+        }
+
+        @keyframes villageFloat {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px) rotate(5deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(30px) translateX(-30px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-20px) translateX(-20px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .login-logo h1 {
+                font-size: 3rem;
+            }
+            
+            .user-type-selector {
+                flex-direction: column;
+            }
+            
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .user-info {
+                flex-direction: column;
+            }
+            
+            .daily-cards, .badge-cards {
+                flex-direction: column;
+            }
+            
+            /* Hide some floating elements on mobile */
+            .floating-animal, .floating-tree, .village-element {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Animated Background -->
+    <div class="background-animation" id="background-animation"></div>
+    
+    <!-- Enhanced Floating Crowns -->
+    <div class="floating-crown" style="top: 10%; left: 10%; animation-delay: 0s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="top: 20%; right: 15%; animation-delay: 2s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 30%; left: 15%; animation-delay: 4s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 20%; right: 10%; animation-delay: 6s;"><i class="fas fa-crown"></i></div>
+    
+    <!-- Enhanced Floating Gems -->
+    <div class="floating-gem" style="top: 15%; left: 20%; color: var(--royal-blue); animation-delay: 1s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="top: 25%; right: 20%; color: var(--royal-red); animation-delay: 3s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="bottom: 35%; left: 20%; color: var(--royal-green); animation-delay: 5s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="bottom: 25%; right: 20%; color: var(--royal-gold); animation-delay: 7s;"><i class="fas fa-gem"></i></div>
+    
+    <!-- New Floating Books -->
+    <div class="floating-book" style="top: 40%; left: 5%; color: var(--royal-pink); animation-delay: 2s;"><i class="fas fa-book"></i></div>
+    <div class="floating-book" style="top: 60%; right: 5%; color: var(--royal-cyan); animation-delay: 4s;"><i class="fas fa-book-open"></i></div>
+    <div class="floating-book" style="bottom: 15%; left: 25%; color: var(--royal-orange); animation-delay: 6s;"><i class="fas fa-graduation-cap"></i></div>
+    
+    <!-- New Floating Animals -->
+    <div class="floating-animal" style="top: 15%; left: 5%; color: var(--royal-teal); animation-delay: 3s;"><i class="fas fa-dove"></i></div>
+    <div class="floating-animal" style="top: 35%; right: 8%; color: var(--royal-orange); animation-delay: 5s;"><i class="fas fa-crow"></i></div>
+    <div class="floating-animal" style="bottom: 25%; left: 8%; color: var(--royal-green); animation-delay: 7s;"><i class="fas fa-frog"></i></div>
+    <div class="floating-animal" style="bottom: 40%; right: 5%; color: var(--royal-red); animation-delay: 2s;"><i class="fas fa-dragon"></i></div>
+    
+    <!-- New Floating Trees -->
+    <div class="floating-tree" style="top: 30%; left: 12%; color: var(--royal-green); animation-delay: 4s;"><i class="fas fa-tree"></i></div>
+    <div class="floating-tree" style="top: 45%; right: 12%; color: var(--royal-green); animation-delay: 6s;"><i class="fas fa-tree"></i></div>
+    
+    <!-- Village Elements -->
+    <div class="village-element" style="top: 25%; left: 25%; color: var(--royal-lavender); animation-delay: 2s;"><i class="fas fa-home"></i></div>
+    <div class="village-element" style="top: 65%; right: 25%; color: var(--royal-gold); animation-delay: 5s;"><i class="fas fa-sun"></i></div>
+    <div class="village-element" style="bottom: 20%; left: 35%; color: var(--royal-teal); animation-delay: 7s;"><i class="fas fa-water"></i></div>
+    <div class="village-element" style="top: 75%; right: 35%; color: var(--royal-orange); animation-delay: 3s;"><i class="fas fa-fire"></i></div>
+    
+    <!-- Interactive Elements -->
+    <div class="interactive-element" style="top: 40%; left: 5%; color: var(--royal-gold);" onclick="alert('🌟 You found a royal gem! 🌟')"><i class="fas fa-star fa-2x"></i></div>
+    <div class="interactive-element" style="top: 60%; right: 5%; color: var(--royal-blue);" onclick="alert('🎓 Learning is fun! 🎓')"><i class="fas fa-graduation-cap fa-2x"></i></div>
+    <div class="interactive-element" style="top: 80%; left: 15%; color: var(--royal-red);" onclick="alert('📚 Knowledge is power! 📚')"><i class="fas fa-book fa-2x"></i></div>
+    <div class="interactive-element" style="top: 20%; right: 8%; color: var(--royal-cyan);" onclick="alert('🔮 You\'re a wizard! 🔮')"><i class="fas fa-hat-wizard fa-2x"></i></div>
+    <div class="interactive-element" style="bottom: 10%; left: 10%; color: var(--royal-teal);" onclick="alert('🌱 Grow your knowledge! 🌱')"><i class="fas fa-seedling fa-2x"></i></div>
+    <div class="interactive-element" style="bottom: 15%; right: 15%; color: var(--royal-orange);" onclick="alert('🚀 Reach for the stars! 🚀')"><i class="fas fa-rocket fa-2x"></i></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span class="rainbow-text">StudIQ</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#subjects">Subjects</a>
+                <a href="#about">About</a>
+                <a href="#" id="logout-btn" style="display: none;">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section" id="login-section">
+        <div class="login-container">
+            <div class="login-logo">
+                <h1>StudIQ</h1>
+                <p>Royal Gamified Learning Platform</p>
+            </div>
+            
+            <div class="user-type-selector">
+                <div class="user-type active" data-type="student">Student</div>
+                <div class="user-type" data-type="teacher">Teacher</div>
+            </div>
+            
+            <div class="role-form active" id="student-form">
+                <div class="input-group">
+                    <label for="student-username">Username</label>
+                    <i class="input-icon fas fa-user"></i>
+                    <input type="text" id="student-username" placeholder="Enter your username">
+                </div>
+                
+                <div class="input-group">
+                    <label for="student-password">Password</label>
+                    <i class="input-icon fas fa-lock"></i>
+                    <input type="password" id="student-password" placeholder="Enter your password">
+                </div>
+                
+                <button class="btn-login" id="student-login">Enter the Kingdom</button>
+            </div>
+            
+            <div class="role-form" id="teacher-form">
+                <div class="input-group">
+                    <label for="teacher-username">Username</label>
+                    <i class="input-icon fas fa-user"></i>
+                    <input type="text" id="teacher-username" placeholder="Enter your username">
+                </div>
+                
+                <div class="input-group">
+                    <label for="teacher-password">Password</label>
+                    <i class="input-icon fas fa-lock"></i>
+                    <input type="password" id="teacher-password" placeholder="Enter your password">
+                </div>
+                
+                <button class="btn-login" id="teacher-login">Enter the Kingdom</button>
+            </div>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn google">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+                <button class="social-btn apple">
+                    <i class="fab fa-apple"></i>
+                    Continue with Apple
+                </button>
+            </div>
+            
+            <div class="terms">
+                By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </div>
+            
+            <div class="show-creds">
+                <button class="show-creds-btn" id="show-creds-btn">Show Demo Credentials</button>
+            </div>
+            
+            <div class="default-accounts" id="default-accounts">
+                <h3>Demo Login Credentials</h3>
+                <div class="account-info">
+                    <span>Student:</span>
+                    <span>student / student123</span>
+                </div>
+                <div class="account-info">
+                    <span>Teacher:</span>
+                    <span>teacher / teacher123</span>
+                </div>
+                <div class="account-info">
+                    <span>Student Email:</span>
+                    <span>student@studiq.com</span>
+                </div>
+                <div class="account-info">
+                    <span>Teacher Email:</span>
+                    <span>teacher@studiq.com</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content (Hidden until login) -->
+    <div class="main-content" id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Welcome to Your Royal Learning Journey!</h1>
+            <p>Embark on an adventure where learning is fun and rewarding. Earn coins, level up, and unlock achievements!</p>
+            <button class="btn float-animation" id="start-learning">Start Learning Now</button>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Gamified Learning</h3>
+                    <p>Earn points, badges, and rewards as you complete lessons and challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-crown"></i>
+                    <h3>Royal Progress</h3>
+                    <p>Level up through different ranks from Page to Royal Scholar as you learn.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Achievements</h3>
+                    <p>Unlock special achievements for completing challenges and mastering subjects.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section class="subjects" id="subjects">
+            <h2 class="section-title">Subjects</h2>
+            <div class="subjects-grid">
+                <div class="subject-card">
+                    <div class="subject-icon math">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>Mathematics</h3>
+                        <p>Explore the magical world of numbers, shapes, and patterns.</p>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon science">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>Science</h3>
+                        <p>Discover the secrets of the universe through exciting experiments.</p>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon technology">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>Technology</h3>
+                        <p>Learn to code and create amazing digital projects.</p>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon engineering">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>Engineering</h3>
+                        <p>Design and build incredible structures and machines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard" id="dashboard">
+            <div class="user-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h2 id="welcome-user">Welcome, Student!</h2>
+                        <div class="level">Level 5 Royal Scholar</div>
+                        <div class="xp-bar">
+                            <div class="xp-fill"></div>
+                        </div>
+                        <div class="coins">750 <i class="fas fa-coins"></i> Royal Coins</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" id="play-game">Play Game</button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Daily Missions</h3>
+                    <p class="mission-title">Today's Royal Challenge</p>
+                    <p class="mission-main">Complete 3 math exercises</p>
+                    <div class="daily-cards">
+                        <div class="daily-card">
+                            <i class="fas fa-book"></i>
+                            <strong>Lessons</strong>
+                            <span>2/5 Completed</span>
+                        </div>
+                        <div class="daily-card">
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Challenges</strong>
+                            <span>3/7 Completed</span>
+                        </div>
+                        <div class="daily-card">
+                            <i class="fas fa-star"></i>
+                            <strong>Goals</strong>
+                            <span>75% Achieved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>My Badges</h3>
+                    <div class="badge-cards">
+                        <div class="badge-card">
+                            <i class="fas fa-medal"></i>
+                            <strong>Math Master</strong>
+                            <span>Earned</span>
+                        </div>
+                        <div class="badge-card">
+                            <i class="fas fa-medal"></i>
+                            <strong>Science Whiz</strong>
+                            <span>Earned</span>
+                        </div>
+                        <div class="badge-card">
+                            <i class="fas fa-medal"></i>
+                            <strong>Coding Explorer</strong>
+                            <span>2 more to go</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>My Progress</h3>
+                    <div class="progress-section">
+                        <div class="progress-bar">
+                            <div class="progress-label">
+                                <span>Mathematics</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-label">
+                                <span>Science</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-label">
+                                <span>Technology</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StudIQ</h3>
+                    <p>A royal gamified learning platform designed to make education fun and engaging for kids of all ages.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#features">Features</a>
+                    <a href="#subjects">Subjects</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 StudIQ - Royal Learning Platform. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated background particles
+        function createParticles() {
+            const background = document.getElementById('background-animation');
+            const colors = ['#7851a9', '#4169e1', '#ffd700', '#c41e3a', '#2e8b57', '#ff4d8d', '#00ffff', '#ff8c00', '#20b2aa', '#e6e6fa'];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 20 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Apply styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = color;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                background.appendChild(particle);
+            }
+        }
+        
+        // User type selection
+        document.querySelectorAll('.user-type').forEach(type => {
+            type.addEventListener('click', () => {
+                // Remove active class from all types
+                document.querySelectorAll('.user-type').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked type
+                type.classList.add('active');
+                
+                // Show the corresponding form
+                const formType = type.getAttribute('data-type');
+                document.querySelectorAll('.role-form').forEach(form => form.classList.remove('active'));
+                document.getElementById(`${formType}-form`).classList.add('active');
+            });
+        });
+        
+        // Show demo credentials
+        document.getElementById('show-creds-btn').addEventListener('click', function() {
+            const accountsDiv = document.getElementById('default-accounts');
+            if (accountsDiv.style.display === 'block') {
+                accountsDiv.style.display = 'none';
+                this.textContent = 'Show Demo Credentials';
+            } else {
+                accountsDiv.style.display = 'block';
+                this.textContent = 'Hide Demo Credentials';
+            }
+        });
+        
+        // Login functionality
+        document.getElementById('student-login').addEventListener('click', function() {
+            const username = document.getElementById('student-username').value;
+            const password = document.getElementById('student-password').value;
+            
+            // Simple validation
+            if (username === 'student' && password === 'student123') {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('welcome-user').textContent = `Welcome, ${username}!`;
+                document.getElementById('logout-btn').style.display = 'block';
+                
+                // Add celebration effect
+                celebrate();
+            } else {
+                alert('Invalid credentials. Try student/student123');
+            }
+        });
+        
+        document.getElementById('teacher-login').addEventListener('click', function() {
+            const username = document.getElementById('teacher-username').value;
+            const password = document.getElementById('teacher-password').value;
+            
+            // Simple validation
+            if (username === 'teacher' && password === 'teacher123') {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('welcome-user').textContent = `Welcome, Professor ${username}!`;
+                document.getElementById('logout-btn').style.display = 'block';
+                
+                // Add celebration effect
+                celebrate();
+            } else {
+                alert('Invalid credentials. Try teacher/teacher123');
+            }
+        });
+        
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-section').style.display = 'flex';
+            document.getElementById('main-content').style.display = 'none';
+            this.style.display = 'none';
+            
+            // Reset forms
+            document.getElementById('student-username').value = '';
+            document.getElementById('student-password').value = '';
+            document.getElementById('teacher-username').value = '';
+            document.getElementById('teacher-password').value = '';
+        });
+        
+        // Celebration effect
+        function celebrate() {
+            const colors = ['#ffd700', '#4169e1', '#c41e3a', '#2e8b57', '#7851a9', '#ff4d8d', '#00ffff', '#ff8c00', '#20b2aa', '#e6e6fa'];
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('particle');
+                confetti.style.position = 'fixed';
+                confetti.style.width = `${Math.random() * 15 + 5}px`;
+                confetti.style.height = confetti.style.width;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.top = '0';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.zIndex = '9999';
+                confetti.style.animation = `floatParticle ${Math.random() * 3 + 2}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Initialize the page
+        window.addEventListener('load', function() {
+            createParticles();
+            
+            // Add floating animation to some elements
+            document.querySelectorAll('.feature-card, .subject-card').forEach(card => {
+                card.classList.add('float-animation');
+            });
+        });
+    </script>
+</body>
+</html>

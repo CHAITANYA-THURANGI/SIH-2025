@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudIQ - Royal Gamified Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --royal-purple: #7851a9;
+            --royal-blue: #4169e1;
+            --royal-gold: #ffd700;
+            --royal-red: #c41e3a;
+            --royal-green: #2e8b57;
+            --royal-pink: #ff4d8d;
+            --royal-cyan: #00ffff;
+            --royal-orange: #ff8c00;
+            --royal-teal: #20b2aa;
+            --royal-lavender: #e6e6fa;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Enhanced Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Floating Crowns */
+        .floating-crown {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--royal-gold);
+            opacity: 0.7;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            animation: floatCrown 20s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatCrown {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) translateX(40px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(20px) translateX(-40px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-40px) translateX(-15px) rotate(3deg);
+            }
+        }
+
+        /* New Floating Gems */
+        .floating-gem {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatGem 25s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatGem {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px) rotate(90deg) scale(1.2);
+            }
+           50% {
+                transform: translateY(30px) translateX(-30px) rotate(180deg) scale(0.8);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-20px) rotate(270deg) scale(1.1);
+            }
+        }
+
+        /* New Floating Books */
+        .floating-book {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatBook 30s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatBook {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-50px) translateX(40px) rotate(5deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(40px) translateX(-40px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-25px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        /* New Floating Animals */
+        .floating-animal {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatAnimal 35s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatAnimal {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-60px) translateX(50px) rotate(5deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(50px) translateX(-50px) rotate(-5deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-40px) translateX(-30px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        /* New Floating Trees */
+        .floating-tree {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px currentColor;
+            animation: floatTree 40s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes floatTree {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px) rotate(3deg) scale(1.05);
+            }
+            50% {
+                transform: translateY(30px) translateX(-30px) rotate(-3deg) scale(0.95);
+            }
+            75% {
+                transform: translateY(-20px) translateX(-20px) rotate(2deg) scale(1.02);
+            }
+        }
+        
+        /* Interactive Elements - Replaced alert with custom toast */
+        .interactive-element {
+            position: absolute;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            animation: bounce 0.5s infinite alternate;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--royal-purple), var(--royal-blue));
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: headerGlow 5s infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% {
+                box-shadow: 0 4px 20px rgba(120, 81, 169, 0.4);
+            }
+            100% {
+                box-shadow: 0 4px 30px rgba(65, 105, 225, 0.6);
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo i {
+            color: var(--royal-gold);
+            animation: spin 10s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--royal-gold);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--royal-purple) 0%, var(--royal-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 2.5rem 3rem; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--royal-gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            animation: containerGlow 3s infinite alternate;
+        }
+
+        @keyframes containerGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 20px 40px rgba(0, 0, 0, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 20px 40px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem; 
+        }
+
+        .login-logo h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red), var(--royal-purple), var(--royal-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite, floatTitle 5s infinite ease-in-out;
+        }
+        
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .login-logo p {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            margin-top: 10px;
+            animation: fadeInOut 3s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .auth-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem; 
+            gap: 10px;
+        }
+
+        .auth-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .auth-toggle button.active {
+            color: var(--royal-gold);
+            font-weight: bold;
+        }
+
+        .auth-toggle button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: var(--royal-gold);
+            border-radius: 2px;
+        }
+        
+        .user-type-selector {
+            display: flex;
+            margin-bottom: 2rem; 
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-type {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .user-type.active {
+            background: var(--royal-gold);
+            color: var(--dark-bg);
+            font-weight: 600;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-type:not(.active):hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem; 
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--royal-gold), inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .input-group input::placeholder, .input-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            color: var(--royal-gold);
+        }
+        
+        #username-group input, #email-group input, #password-group input {
+            padding-left: 45px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red));
+            color: var(--dark-bg);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            margin-top: 1.5rem; 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #ffed4e, #d62839);
+        }
+
+        .btn-login:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: translateY(0);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--dark-bg);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main Content (Hidden until login) */
+        .main-content {
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%234169e1" x="0" y="0" width="100" height="100"/><path fill="%237851a9" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>') center/cover;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--royal-purple), var(--royal-blue));
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            animation: floatTitle 5s infinite ease-in-out;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--royal-gold);
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            background: #ffed4e;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--royal-gold);
+            position: relative;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--royal-red);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-gold);
+        }
+
+        .feature-card i {
+            font-size: 3.5rem;
+            color: var(--royal-blue);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--royal-gold);
+        }
+
+        /* Subjects Section */
+        .subjects {
+            padding: 5rem 2rem;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subject-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-blue);
+        }
+
+        .subject-icon {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: subjectShine 4s infinite;
+        }
+
+        @keyframes subjectShine {
+            0% { left: -50%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .math { background: linear-gradient(to right, var(--royal-blue), #4a7de5); }
+        .science { background: linear-gradient(to right, var(--royal-green), #3da16a); }
+        .technology { background: linear-gradient(to right, var(--royal-purple), #8b6bc1); }
+        .engineering { background: linear-gradient(to right, var(--royal-red), #d62839); }
+
+        .subject-content {
+            padding: 1.5rem;
+        }
+
+        .subject-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--royal-gold);
+        }
+
+        .subject-card p {
+            color: var(--text-muted);
+        }
+        
+        /* Quiz CTA Section */
+        .quiz-cta {
+            padding: 6rem 2rem;
+            margin: 4rem 2rem;
+            background: var(--dark-card);
+            text-align: center;
+            border: 2px solid var(--royal-gold);
+            position: relative;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .quiz-cta::before {
+             content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(120, 81, 169, 0.3),
+                transparent 30%
+            );
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .quiz-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quiz-cta h2 {
+            font-size: 2.8rem;
+            color: var(--royal-gold);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .quiz-cta p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        /* Student Dashboard Styles */
+        #dashboard {
+             display: none;
+        }
+        
+        .dashboard {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-header {
+            background: linear-gradient(to right, var(--royal-purple), var(--royal-blue));
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--royal-gold);
+            animation: pulse 3s infinite;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--royal-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: bounce 2s infinite alternate;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3rem;
+        }
+
+        #dashboard-username {
+            font-size: 1.8rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .level {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .xp-bar {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 10px;
+            margin-top: 0;
+            width: 180px;
+        }
+
+        .xp-fill {
+            background: var(--royal-gold);
+            height: 100%;
+            width: 75%;
+            border-radius: 8px;
+            transition: width 0.5s ease-in-out;
+            animation: xpPulse 2s infinite alternate;
+        }
+
+        @keyframes xpPulse {
+            0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+        }
+
+        .coins {
+            font-size: 1rem;
+            color: var(--royal-gold);
+            margin-top: 0;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: var(--royal-gold);
+        }
+        
+        .dashboard-card h3 {
+            font-size: 1.8rem;
+            color: var(--royal-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .missions-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .missions-card p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--royal-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-items {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .mission-item {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 1rem;
+            border-radius: 15px;
+            width: 100%;
+        }
+        
+        .mission-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--royal-gold);
+        }
+
+        .mission-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: normal;
+        }
+        
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .badge-item {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .badge-item i {
+            font-size: 2.5rem;
+            color: var(--royal-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-item.not-earned i {
+            color: #555;
+        }
+        
+        .badge-item h5 {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+
+        .badge-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .progress-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--royal-blue), var(--royal-purple));
+            border-radius: 12px;
+        }
+
+        .timetable-controls {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .timetable-controls select, .timetable-controls input {
+             padding: 0.5rem;
+             background: var(--dark-card);
+             color: var(--text-light);
+             border: 1px solid var(--royal-blue);
+             border-radius: 8px;
+        }
+
+        .timetable-controls select option {
+            color: var(--dark-bg);
+            background-color: var(--text-light);
+        }
+        
+        .timetable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .timetable-day {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 1rem;
+            border-radius: 15px;
+        }
+        .timetable-day h4 {
+            color: var(--royal-gold);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--royal-purple);
+            padding-bottom: 0.5rem;
+        }
+        .timetable-class {
+            background: #0f172a;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+         .timetable-class a {
+            color: var(--royal-cyan);
+            text-decoration: none;
+         }
+
+        /* Teacher Dashboard Styles */
+        #teacher-dashboard { display: none; }
+
+        .teacher-dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .teacher-dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .teacher-dashboard-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .teacher-dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .teacher-dashboard-grid .dashboard-card {
+            grid-column: 1 / -1;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            background: rgba(15, 23, 42, 1);
+            transform: translateY(-5px);
+        }
+        .stat-card h4 { font-size: 1rem; color: var(--text-muted); }
+        .stat-card p { font-size: 2rem; font-weight: bold; color: var(--royal-gold); }
+
+        .manage-subject-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .subject-manage-btn {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            border: none;
+            color: var(--text-light);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .subject-manage-btn:hover {
+             background: var(--royal-blue);
+        }
+        .subject-manage-btn i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .quiz-card {
+             background: linear-gradient(135deg, #2b3a54, #1e293b);
+             border-color: var(--royal-purple);
+             animation: quizBoxGlow 4s infinite alternate;
+        }
+        @keyframes quizBoxGlow {
+            from { box-shadow: 0 0 20px rgba(120, 81, 169, 0.3); }
+            to { box-shadow: 0 0 40px rgba(120, 81, 169, 0.6); }
+        }
+
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+         .student-table tbody tr {
+             cursor: pointer;
+             transition: background-color 0.2s ease;
+         }
+         .student-table tbody tr:hover {
+             background-color: rgba(65, 105, 225, 0.2);
+         }
+         .student-table thead, .student-table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+         .student-table-scrollable {
+            max-height: 400px;
+            overflow-y: auto;
+            display: block;
+        }
+
+        .student-table th, .student-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .student-table th {
+            color: var(--royal-gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-card);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--royal-gold);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--royal-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        /* Toast Notification */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--dark-card);
+            color: var(--text-light);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid;
+            transform: translateX(120%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success { border-color: var(--royal-green); }
+        .toast.error { border-color: var(--royal-red); }
+        .toast.info { border-color: var(--royal-blue); }
+
+        .toast i {
+            font-size: 1.5rem;
+        }
+        
+        .toast.success i { color: var(--royal-green); }
+        .toast.error i { color: var(--royal-red); }
+        .toast.info i { color: var(--royal-blue); }
+        
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            margin: 10% auto;
+            padding: 30px;
+            border: 3px solid var(--royal-gold);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        #confirm-modal .modal-content {
+             margin: 15% auto;
+        }
+        
+        #student-preview-modal .modal-content {
+             max-width: 800px;
+        }
+
+
+        .close-btn {
+            color: var(--text-muted);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--royal-red);
+        }
+
+        .modal-content h2 {
+            color: var(--royal-gold);
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: var(--royal-blue);
+            border-color: var(--royal-gold);
+            transform: translateY(-3px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        /* Rainbow Text Animation */
+        @keyframes rainbow {
+            0% { color: var(--royal-red); }
+            20% { color: var(--royal-orange); }
+            40% { color: var(--royal-gold); }
+            60% { color: var(--royal-green); }
+            80% { color: var(--royal-blue); }
+            100% { color: var(--royal-purple); }
+        }
+
+        .rainbow-text {
+            animation: rainbow 5s infinite;
+        }
+        
+        /* Option Row for Question Form */
+        .options-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option-row input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .option-row input[type="text"] {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .teacher-dashboard-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "roster"
+                    "classes"
+                    "quiz";
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .login-container {
+                padding: 30px 20px;
+            }
+            .login-logo h1 {
+                font-size: 3rem;
+            }
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .user-info {
+                flex-direction: column;
+            }
+            #toast-container {
+                right: 50%;
+                transform: translateX(50%);
+                width: 90%;
+            }
+            .floating-animal, .floating-tree, .floating-book {
+                display: none;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation" id="background-animation"></div>
+    <div class="floating-crown" style="top: 10%; left: 10%;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="top: 20%; right: 15%; animation-delay: 2s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 30%; left: 15%; animation-delay: 4s;"><i class="fas fa-crown"></i></div>
+    <div class="floating-crown" style="bottom: 20%; right: 10%; animation-delay: 6s;"><i class="fas fa-crown"></i></div>
+    
+    <div class="floating-gem" style="top: 15%; left: 20%; color: var(--royal-blue); animation-delay: 1s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="top: 25%; right: 20%; color: var(--royal-red); animation-delay: 3s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="bottom: 35%; left: 20%; color: var(--royal-green); animation-delay: 5s;"><i class="fas fa-gem"></i></div>
+    <div class="floating-gem" style="bottom: 25%; right: 20%; color: var(--royal-gold); animation-delay: 7s;"><i class="fas fa-gem"></i></div>
+    
+    <div class="floating-book" style="top: 40%; left: 5%; color: var(--royal-pink); animation-delay: 2s;"><i class="fas fa-book"></i></div>
+    <div class="floating-book" style="top: 60%; right: 5%; color: var(--royal-cyan); animation-delay: 4s;"><i class="fas fa-book-open"></i></div>
+    <div class="floating-book" style="bottom: 15%; left: 25%; color: var(--royal-orange); animation-delay: 6s;"><i class="fas fa-graduation-cap"></i></div>
+    
+    <div class="floating-animal" style="top: 15%; left: 5%; color: var(--royal-teal); animation-delay: 3s;"><i class="fas fa-dove"></i></div>
+    <div class="floating-animal" style="top: 35%; right: 8%; color: var(--royal-orange); animation-delay: 5s;"><i class="fas fa-crow"></i></div>
+    <div class="floating-animal" style="bottom: 25%; left: 8%; color: var(--royal-green); animation-delay: 7s;"><i class="fas fa-frog"></i></div>
+    <div class="floating-animal" style="bottom: 40%; right: 5%; color: var(--royal-red); animation-delay: 2s;"><i class="fas fa-dragon"></i></div>
+    
+    <div class="floating-tree" style="top: 30%; left: 12%; color: var(--royal-green); animation-delay: 4s;"><i class="fas fa-tree"></i></div>
+    <div class="floating-tree" style="top: 45%; right: 12%; color: var(--royal-green); animation-delay: 6s;"><i class="fas fa-tree"></i></div>
+
+    <div class="interactive-element" style="top: 40%; left: 5%; color: var(--royal-gold);" data-message="🌟 You found a royal gem! 🌟"><i class="fas fa-star fa-2x"></i></div>
+    <div class="interactive-element" style="top: 60%; right: 5%; color: var(--royal-blue);" data-message="🎓 Learning is fun! 🎓"><i class="fas fa-graduation-cap fa-2x"></i></div>
+    <div class="interactive-element" style="top: 80%; left: 15%; color: var(--royal-red);" data-message="📚 Knowledge is power! 📚"><i class="fas fa-book fa-2x"></i></div>
+    <div class="interactive-element" style="top: 20%; right: 8%; color: var(--royal-cyan);" data-message="🔮 You're a wizard! 🔮"><i class="fas fa-hat-wizard fa-2x"></i></div>
+    <div class="interactive-element" style="bottom: 10%; left: 10%; color: var(--royal-teal);" data-message="🌱 Grow your knowledge! 🌱"><i class="fas fa-seedling fa-2x"></i></div>
+    <div class="interactive-element" style="bottom: 15%; right: 15%; color: var(--royal-orange);" data-message="🚀 Reach for the stars! 🚀"><i class="fas fa-rocket fa-2x"></i></div>
+    
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span class="rainbow-text">StudIQ</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#subjects">Subjects</a>
+                <a href="#dashboard">Dashboard</a>
+                <a href="#" id="logout-btn" style="display: none;">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="login-section" id="login-section">
+        <div class="login-container">
+            <div class="login-logo">
+                <h1>StudIQ</h1>
+                <p>Royal Gamified Learning Platform</p>
+            </div>
+
+            <div class="auth-toggle">
+                <button id="login-toggle" class="active">Login</button>
+                <button id="signup-toggle">Sign Up</button>
+            </div>
+            
+            <form id="auth-form">
+                <div class="user-type-selector">
+                    <div class="user-type active" data-type="student">Student</div>
+                    <div class="user-type" data-type="teacher">Teacher</div>
+                </div>
+                
+                <div class="input-group" id="username-group">
+                    <label for="username">Username</label>
+                    <i class="input-icon fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="input-group" id="email-group">
+                    <label for="email">Email</label>
+                    <i class="input-icon fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="input-group" id="password-group">
+                    <label for="password">Password</label>
+                    <i class="input-icon fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Enter your password" required minlength="6">
+                </div>
+                
+                <button type="submit" class="btn-login" id="auth-btn">
+                    <span id="auth-btn-text">Enter the Kingdom</span>
+                    <div class="loader" style="display: none;"></div>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <main class="main-content" id="main-content">
+        <div id="student-view">
+            <section class="hero">
+                <h1 id="welcome-user">Welcome to Your Royal Learning Journey!</h1>
+                <p>Embark on an adventure where learning is fun and rewarding. Earn coins, level up, and unlock achievements!</p>
+                <button class="btn" id="start-learning">Start a Lesson (+10 XP)</button>
+            </section>
+
+            <section class="features" id="features">
+                <h2 class="section-title">Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Gamified Learning</h3>
+                        <p>Earn points, badges, and rewards as you complete lessons and challenges.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-crown"></i>
+                        <h3>Royal Progress</h3>
+                        <p>Level up through different ranks from Page to Royal Scholar as you learn.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Achievements</h3>
+                        <p>Unlock special achievements for completing challenges and mastering subjects.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="subjects" id="subjects">
+                <h2 class="section-title">Subjects</h2>
+                <div class="subjects-grid">
+                    <div class="subject-card" data-subject="Mathematics">
+                        <div class="subject-icon math">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="subject-content">
+                            <h3>Mathematics</h3>
+                            <p>Explore the magical world of numbers, shapes, and patterns.</p>
+                        </div>
+                    </div>
+                    <div class="subject-card" data-subject="Science">
+                        <div class="subject-icon science">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="subject-content">
+                            <h3>Science</h3>
+                            <p>Discover the secrets of the universe through exciting experiments.</p>
+                        </div>
+                    </div>
+                    <div class="subject-card" data-subject="Technology">
+                        <div class="subject-icon technology">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="subject-content">
+                            <h3>Technology</h3>
+                            <p>Learn to code and create amazing digital projects.</p>
+                        </div>
+                    </div>
+                    <div class="subject-card" data-subject="Engineering">
+                        <div class="subject-icon engineering">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="subject-content">
+                            <h3>Engineering</h3>
+                            <p>Design and build incredible structures and machines.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="quiz-cta" id="quiz-cta">
+                <div class="quiz-cta-content">
+                    <h2>Ready for a Royal Challenge?</h2>
+                    <p>Test your knowledge, earn XP, and claim your rewards. A new adventure awaits!</p>
+                </div>
+            </section>
+
+            <section class="dashboard" id="dashboard">
+                <div class="user-header">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <h2 id="dashboard-username">Student</h2>
+                            <div class="level" id="dashboard-level">Level 1 Page</div>
+                            <div class="xp-bar">
+                                <div class="xp-fill" id="dashboard-xp-fill"></div>
+                            </div>
+                            <div class="coins" id="dashboard-coins">0 <i class="fas fa-coins"></i> Royal Coins</div>
+                        </div>
+                    </div>
+                    <button class="btn" id="play-game-btn">Play a Game</button>
+                </div>
+
+                <div class="dashboard-grid">
+                     <div class="dashboard-card" style="grid-column: 1 / -1;">
+                        <h3>Weekly Timetable</h3>
+                        <div class="timetable-controls">
+                            <select id="grade-selector">
+                                <option value="">Select Your Grade</option>
+                                <!-- Options will be added by JS -->
+                            </select>
+                            <select id="subject-selector">
+                                <option value="All">All Subjects</option>
+                                <!-- Options will be added by JS -->
+                            </select>
+                        </div>
+                        <div class="timetable-grid" id="student-timetable">
+                            <p>Please select your grade to see the class schedule.</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="missions-card">
+                            <h3>Daily Missions</h3>
+                            <h4>Today's Royal Challenge</h4>
+                            <p>Complete 3 math exercises</p>
+                            <div class="mission-items">
+                                <div class="mission-item">
+                                    <i class="fas fa-book"></i>
+                                    <h5>Lessons</h5>
+                                    <p>2/5 Completed</p>
+                                </div>
+                                <div class="mission-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h5>Challenges</h5>
+                                    <p>3/7 Completed</p>
+                                </div>
+                                <div class="mission-item">
+                                    <i class="fas fa-star"></i>
+                                    <h5>Goals</h5>
+                                    <p>75% Achieved</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>My Badges</h3>
+                        <div class="badges-grid">
+                            <div class="badge-item">
+                                <i class="fas fa-award"></i>
+                                <h5>Math Master</h5>
+                                <p>Earned</p>
+                            </div>
+                            <div class="badge-item">
+                                <i class="fas fa-award"></i>
+                                <h5>Science Whiz</h5>
+                                <p>Earned</p>
+                            </div>
+                            <div class="badge-item not-earned">
+                                <i class="fas fa-award"></i>
+                                <h5>Coding Explorer</h5>
+                                <p>2 more to go</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>My Progress</h3>
+                        <div class="progress-list">
+                            <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Mathematics</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                             <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Science</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                             <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Technology</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="teacher-view">
+             <section class="dashboard" id="teacher-dashboard">
+                <div class="teacher-dashboard-header">
+                    <h1 id="teacher-welcome">Welcome back, Professor!</h1>
+                    <p>Here's the current state of your Royal Kingdom.</p>
+                </div>
+                <div class="teacher-dashboard-grid">
+                    <div class="dashboard-card classes-card">
+                        <h3>Class Schedule</h3>
+                         <div class="timetable-controls">
+                            <h4>Weekly Timetable</h4>
+                            <button class="btn" id="upload-class-btn"><i class="fas fa-upload"></i> Upload New Class</button>
+                        </div>
+                        <div class="timetable-grid" id="teacher-timetable">
+                            <!-- Teacher's full timetable will be rendered here by JS -->
+                        </div>
+                    </div>
+                    <div class="dashboard-card roster-card">
+                        <h3>Student Roster</h3>
+                        <div class="input-group" style="margin-bottom: 1rem;">
+                            <input type="search" id="student-search-bar" placeholder="Search for a student...">
+                        </div>
+                        <div class="student-table-scrollable">
+                             <table class="student-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Level</th>
+                                        <th>XP</th>
+                                        <th>Coins</th>
+                                        <th>Last Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="teacher-roster-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="dashboard-card quiz-card">
+                        <h3>Quiz Kingdom</h3>
+                        <p>Create and manage quizzes to challenge your students.</p>
+                        <button class="btn" id="add-question-btn" style="width: 100%; margin-top: 1rem;"><i class="fas fa-plus-circle"></i> Create New Quiz</button>
+                        <div id="question-bank-container" style="margin-top: 1.5rem;">
+                            <h4>Existing Questions</h4>
+                             <table class="student-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Question</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="question-list-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StudIQ</h3>
+                    <p>A royal gamified learning platform designed to make education fun and engaging for kids of all ages.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#features">Features</a>
+                    <a href="#subjects">Subjects</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 StudIQ - Royal Learning Platform. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+    
+    <div id="toast-container"></div>
+
+    <!-- Modals -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="quiz-question-area">
+                <h2>Royal Challenge</h2>
+                <p>Question text goes here...</p>
+                <div class="options">
+                    </div>
+            </div>
+            <div id="quiz-summary-area" style="display: none;">
+                <h2>Challenge Complete!</h2>
+                <p style="font-size: 1.5rem; color: var(--royal-gold);">Here is your score:</p>
+                <p style="font-size: 1.2rem;">Correct Answers: <span id="correct-score">0</span></p>
+                <p style="font-size: 1.2rem;">Wrong Answers: <span id="wrong-score">0</span></p>
+                 <div id="quiz-review-area" style="text-align: left; margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="add-question-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add New Quiz Question</h2>
+            <form id="add-question-form">
+                <div class="input-group">
+                    <label for="question-title">Question Title</label>
+                    <input type="text" id="question-title" placeholder="e.g., Royal Science Challenge" required>
+                </div>
+                <div class="input-group">
+                    <label for="question-text">Question Text</label>
+                    <textarea id="question-text" placeholder="Enter the question..." rows="3" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="question-subject">Subject</label>
+                    <select id="question-subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="Science">Science</option>
+                        <option value="Geography">Geography</option>
+                        <option value="History">History</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="General Knowledge">General Knowledge</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Options (mark the correct one)</label>
+                    <div class="options-input">
+                        <div class="option-row">
+                            <input type="radio" name="correct-answer" value="0" required>
+                            <input type="text" class="option-text" placeholder="Option 1" required>
+                        </div>
+                        <div class="option-row">
+                            <input type="radio" name="correct-answer" value="1" required>
+                            <input type="text" class="option-text" placeholder="Option 2" required>
+                        </div>
+                        <div class="option-row">
+                            <input type="radio" name="correct-answer" value="2" required>
+                            <input type="text" class="option-text" placeholder="Option 3" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">Add Question</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="student-preview-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="user-header" style="margin-bottom: 1rem; animation: none;">
+                <div class="user-info">
+                    <div class="user-avatar" id="student-preview-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details" style="text-align: left;">
+                        <h2 id="student-preview-name" style="color: var(--text-light);">Student Name</h2>
+                        <div id="student-preview-level" class="level">Level X</div>
+                        <div class="xp-bar">
+                           <div class="xp-fill" id="student-preview-xp"></div>
+                        </div>
+                        <div id="student-preview-coins" class="coins">0 Coins</div>
+                    </div>
+                </div>
+            </div>
+             <div class="dashboard-grid">
+                <div class="stat-card" style="margin: 0;">
+                    <h4>Classes Watched</h4>
+                    <p id="student-preview-classes">0</p>
+                </div>
+                 <div class="stat-card" style="margin: 0;">
+                    <h4>Quizzes Attempted</h4>
+                    <p id="student-preview-quizzes">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="student-subject-modal" class="modal">
+         <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="student-subject-title">Subject Details</h2>
+            <p>Here is a basic syllabus for your grade. Check the timetable for specific classes!</p>
+            <div id="student-syllabus-content" style="text-align: left; margin-top: 1rem;">
+                <!-- Syllabus will be injected here -->
+            </div>
+        </div>
+    </div>
+
+     <div id="teacher-subject-modal" class="modal">
+         <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+            <span class="close-btn">&times;</span>
+            <h2 id="teacher-subject-title">Manage Subject</h2>
+            <p>Review the curriculum for this subject across different grades.</p>
+            <div id="teacher-syllabus-content" style="text-align: left; margin-top: 1rem;">
+                <!-- Teacher syllabus will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="upload-class-modal" class="modal">
+         <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Upload a New Class</h2>
+            <form id="upload-class-form">
+                 <div class="input-group">
+                    <label for="class-title">Class Title</label>
+                    <input type="text" id="class-title" placeholder="e.g., Introduction to Algebra" required>
+                </div>
+                 <div class="input-group">
+                    <label for="class-subject">Subject</label>
+                    <select id="class-subject" required>
+                         <option value="Mathematics">Mathematics</option>
+                        <option value="Science">Science</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Engineering">Engineering</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="class-grade">Grade</label>
+                    <select id="class-grade" required>
+                        <!-- Options will be added by JS -->
+                    </select>
+                </div>
+                 <div class="input-group">
+                    <label for="class-day">Day of Week</label>
+                    <select id="class-day" required>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="class-video-url">Video URL</label>
+                    <input type="url" id="class-video-url" placeholder="https://youtube.com/..." required>
+                </div>
+                <button type="submit" class="btn-login">Upload Class</button>
+            </form>
+        </div>
+    </div>
+    
+     <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="confirm-title">Are you sure?</h2>
+            <p id="confirm-text">Do you really want to delete this question?</p>
+            <div class="confirm-buttons">
+                <button class="btn" id="confirm-yes-btn">Yes</button>
+                <button class="btn" id="confirm-no-btn" style="background: var(--royal-red);">No</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // ===================================================================================
+        // ==> FINAL STEP: PASTE YOUR FIREBASE CONFIGURATION HERE <==
+        // ===================================================================================
+        // Go to your Firebase project, get your web app's configuration keys,
+        // and replace the entire block below with your project's keys.
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyAkCnnZww6qm_8mBBlZpC2tO5biwWpywR8",
+          authDomain: "studiq-project.firebaseapp.com",
+          projectId: "studiq-project",
+          storageBucket: "studiq-project.firebasestorage.app",
+          messagingSenderId: "847040641252",
+          appId: "1:847040641252:web:0157929af502b6c3f6d4f1",
+          measurementId: "G-WJZ6N63692"
+        };
+        
+        // ===================================================================================
+        // (No need to edit anything below this line)
+        // ===================================================================================
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut,
+            signInWithCustomToken
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            setDoc, 
+            getDoc,
+            updateDoc,
+            increment,
+            collection,
+            query,
+            where,
+            getDocs,
+            addDoc,
+            deleteDoc,
+            arrayUnion
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Use provided config if it exists
+        const finalFirebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : firebaseConfig;
+        
+        let app, auth, db;
+        
+        // UI Elements
+        const loginSection = document.getElementById('login-section');
+        const mainContent = document.getElementById('main-content');
+        const studentView = document.getElementById('student-view');
+        const teacherView = document.getElementById('teacher-view');
+        const logoutBtn = document.getElementById('logout-btn');
+        const authForm = document.getElementById('auth-form');
+        const loginToggle = document.getElementById('login-toggle');
+        const signupToggle = document.getElementById('signup-toggle');
+        const usernameGroup = document.getElementById('username-group');
+        const authBtnText = document.getElementById('auth-btn-text');
+        const authBtnLoader = document.querySelector('#auth-btn .loader');
+        const authBtn = document.getElementById('auth-btn');
+        const addQuestionBtn = document.getElementById('add-question-btn');
+        const addQuestionModal = document.getElementById('add-question-modal');
+        const addQuestionForm = document.getElementById('add-question-form');
+        
+        let isLoginMode = true;
+        let fallAnimationAdded = false; // Flag to check if animation is added
+
+        // --- MOCK DATA ---
+        let classScheduleData = [
+            // Grade 1-3 (Lower Elementary)
+            { id: 1, grade: 1, day: 'Monday', subject: 'Mathematics', title: 'Counting to 20', url: 'https://www.youtube.com/watch?v=D0Ajq682yrA' },
+            { id: 2, grade: 1, day: 'Wednesday', subject: 'Science', title: 'Living Things', url: 'https://www.youtube.com/watch?v=p51FiPO2_kQ' },
+            { id: 3, grade: 2, day: 'Tuesday', subject: 'Mathematics', title: 'Simple Addition', url: 'https://www.youtube.com/watch?v=_ps12eRIWWo' },
+            { id: 4, grade: 2, day: 'Thursday', subject: 'Science', title: 'Parts of a Plant', url: 'https://www.youtube.com/watch?v=bLhOLd_st20' },
+            { id: 5, grade: 3, day: 'Friday', subject: 'Technology', title: 'What is a Computer?', url: 'https://www.youtube.com/watch?v=7c0Qad_tI_c' },
+            { id: 6, grade: 3, day: 'Monday', subject: 'Mathematics', title: 'Basic Multiplication', url: 'https://www.youtube.com/watch?v=T_cnK31KscI' },
+            { id: 22, grade: 1, day: 'Tuesday', subject: 'Mathematics', title: 'Shapes Song', url: 'https://www.youtube.com/watch?v=OEbRDtCAFdU' },
+            { id: 23, grade: 2, day: 'Friday', subject: 'English', title: 'Nouns for Kids', url: 'https://www.youtube.com/watch?v=c3yJ2Pa-dG4' },
+
+
+            // Grade 4-6 (Upper Elementary)
+            { id: 7, grade: 4, day: 'Tuesday', subject: 'Science', title: 'The Water Cycle', url: 'https://www.youtube.com/watch?v=y5gFI3pM_wI' },
+            { id: 8, grade: 5, day: 'Monday', subject: 'Mathematics', title: 'Intro to Fractions', url: 'https://www.youtube.com/watch?v=p33BYf1NDAE' },
+            { id: 9, grade: 5, day: 'Wednesday', subject: 'Science', title: 'The Solar System', url: 'https://www.youtube.com/watch?v=libKVRa01L8' },
+            { id: 10, grade: 6, day: 'Friday', subject: 'Technology', title: 'Internet Safety', url: 'https://www.youtube.com/watch?v=X9Htg8V3eik' },
+            { id: 11, grade: 6, day: 'Wednesday', subject: 'Mathematics', title: 'Ratios', url: 'https://www.youtube.com/watch?v=HpdMJaKaXXc' },
+            { id: 24, grade: 4, day: 'Wednesday', subject: 'Mathematics', title: 'Long Division', url: 'https://www.youtube.com/watch?v=LGqBQrUYua4' },
+            { id: 25, grade: 5, day: 'Tuesday', subject: 'English', title: 'Types of Sentences', url: 'https://www.youtube.com/watch?v=ew42d-8-EVs' },
+
+            // Grade 7-9 (Middle School)
+            { id: 12, grade: 7, day: 'Thursday', subject: 'Science', title: 'Cells and Organelles', url: 'https://www.youtube.com/watch?v=URUJD5NEXC8' },
+            { id: 13, grade: 8, day: 'Tuesday', subject: 'Mathematics', title: 'Pythagorean Theorem', url: 'https://www.youtube.com/watch?v=GkCWPzJmHM4' },
+            { id: 14, grade: 8, day: 'Thursday', subject: 'Science', title: 'Chemical Reactions', url: 'https://www.youtube.com/watch?v=2S6e11NBwiw' },
+            { id: 15, grade: 9, day: 'Monday', subject: 'Technology', title: 'How a Search Engine Works', url: 'https://www.youtube.com/watch?v=LVV_93mBfSU' },
+            { id: 16, grade: 9, day: 'Friday', subject: 'Engineering', title: 'Simple Machines', url: 'https://www.youtube.com/watch?v=ivRQ9M9I8PA' },
+            { id: 26, grade: 7, day: 'Friday', subject: 'Mathematics', title: 'Proportional Relationships', url: 'https://www.youtube.com/watch?v=G2ht2-buo2c' },
+            
+            // Grade 10-12 (High School)
+            { id: 17, grade: 10, day: 'Wednesday', subject: 'Science', title: 'Newton\'s Laws', url: 'https://www.youtube.com/watch?v=kKKM8Y-u7ds' },
+            { id: 18, grade: 11, day: 'Monday', subject: 'Mathematics', title: 'Trigonometry Basics', url: 'https://www.youtube.com/watch?v=U23D2O21-S4' },
+            { id: 19, grade: 11, day: 'Thursday', subject: 'Engineering', title: 'How Bridges are Built', url: 'https://www.youtube.com/watch?v=oVOnRPefcno' },
+            { id: 20, grade: 12, day: 'Tuesday', subject: 'Technology', title: 'Intro to Python', url: 'https://www.youtube.com/watch?v=kqtD5dpn9C8' },
+            { id: 21, grade: 12, day: 'Friday', subject: 'Science', title: 'Basics of Quantum Physics', url: 'https://www.youtube.com/watch?v=iVpX_b2zY_U' },
+            { id: 27, grade: 10, day: 'Thursday', subject: 'English', title: 'How to Analyze Literature', url: 'https://www.youtube.com/watch?v=f-w-L-u_gUQ' },
+        ];
+
+        const syllabusData = {
+            Mathematics: {
+                1: ["Counting Objects", "Number Recognition (1-20)", "Basic Shapes", "Simple Addition & Subtraction"],
+                2: ["Addition and Subtraction within 100", "Place Value", "Time and Money", "Measurement"],
+                3: ["Multiplication and Division", "Fractions Introduction", "Area and Perimeter"],
+                4: ["Advanced Multiplication", "Long Division", "Geometry of 2D Shapes", "Decimals"],
+                5: ["Fractions & Decimals", "Order of Operations", "Volume of Cubes", "Data Handling"],
+                6: ["Ratios and Proportions", "Integers", "Algebraic Expressions", "Statistics"],
+                7: ["The Number System", "Expressions and Equations", "Geometry: Angles, Area, Volume"],
+                8: ["Linear Equations", "Pythagorean Theorem", "Functions Introduction", "Transformations"],
+                9: ["Quadratic Equations", "Systems of Equations", "Geometry: Circles and Triangles"],
+                10: ["Polynomials", "Advanced Factoring", "Probability and Statistics", "Congruence and Similarity"],
+                11: ["Trigonometry", "Sets and Functions", "Complex Numbers", "Linear Inequalities"],
+                12: ["Calculus Introduction", "Limits and Derivatives", "Vectors", "3D Geometry"]
+            },
+            Science: {
+                1: ["Living vs. Non-living things", "Parts of a Plant", "The Five Senses", "Types of Animals"],
+                2: ["States of Matter", "Food Groups", "Simple Habitats", "Weather"],
+                3: ["The Human Body", "Simple Machines", "Sound and Light", "Magnets"],
+                4: ["The Water Cycle", "Ecosystems", "Electricity Basics", "The Earth and Sun"],
+                5: ["The Solar System", "Forces and Motion", "Mixtures and Solutions", "Life Cycles"],
+                6: ["Cells to Tissues", "Photosynthesis", "Energy Forms", "Earth's Atmosphere"],
+                7: ["Acids and Bases", "Nutrition in Animals", "Weather, Climate, & Adaptations"],
+                8: ["Cell Structure", "Chemical Reactions", "Force and Pressure", "Reproduction"],
+                9: ["Atoms and Molecules", "Gravitation", "Diversity in Living Organisms", "Work and Energy"],
+                10: ["Chemical Equations", "Light: Reflection and Refraction", "Life Processes", "Electricity"],
+                11: ["Laws of Motion", "Atomic Structure", "Genetics", "Thermodynamics"],
+                12: ["Electromagnetic Induction", "Biotechnology", "Ecology", "Modern Physics"]
+            },
+            Technology: {
+                3: ["Parts of a Computer", "Using a Mouse & Keyboard", "Opening & Closing Programs"],
+                6: ["Internet Safety", "Using Search Engines", "Creating a Simple Document (Word)"],
+                9: ["Introduction to HTML & CSS", "How the Internet Works", "Understanding Algorithms"],
+                12: ["Basics of Python Programming", "Cybersecurity Fundamentals", "What is Artificial Intelligence?"]
+            },
+            Engineering: {
+                9: ["Simple Machines", "Introduction to Design Process", "Building Basic Structures"],
+                11: ["How Bridges Work", "Basics of Aerodynamics", "Introduction to Electrical Circuits"]
+            },
+            English: {
+                2: ["Nouns", "Verbs", "Basic Sentence Structure"],
+                5: ["Types of Sentences", "Punctuation", "Figurative Language"],
+                10: ["Literary Analysis", "Shakespearean Basics", "Essay Writing"]
+            }
+        };
+
+
+        // --- AUTHENTICATION LOGIC ---
+
+        // Listen for authentication state changes
+        function setupAuthListener() {
+            onAuthStateChanged(auth, user => {
+                const studentDashboard = document.getElementById('dashboard');
+                const teacherDashboard = document.getElementById('teacher-dashboard');
+
+                if (user) {
+                    // User is signed in
+                    fetchUserData(user);
+                    loginSection.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    logoutBtn.style.display = 'block';
+
+                } else {
+                    // User is signed out
+                    loginSection.style.display = 'flex';
+                    mainContent.style.display = 'none';
+                    logoutBtn.style.display = 'none';
+                    if (studentDashboard) studentDashboard.style.display = 'none';
+                    if (teacherDashboard) teacherDashboard.style.display = 'none';
+                }
+            });
+        }
+        
+        // Handle custom token sign in if provided
+        async function initialAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                }
+            } catch (error) {
+                console.error("Error signing in with custom token:", error);
+                showToast("Session authentication failed.", "error");
+            }
+        }
+
+        // --- FIRESTORE DATABASE LOGIC ---
+
+        // Create a new user document in Firestore on sign up
+        async function setupUserDocument(user, username, role) {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+            const userData = {
+                uid: user.uid,
+                email: user.email,
+                username: username,
+                role: role,
+                level: 1,
+                xp: 0,
+                coins: 50, // Starting coins
+                createdAt: new Date(),
+                lastActive: new Date(),
+                classesWatched: 0,
+                quizzesAttempted: 0,
+                watchedClassIds: []
+            };
+            await setDoc(userRef, userData);
+            return userData;
+        }
+
+        // Fetch user data from Firestore and display the correct dashboard
+        async function fetchUserData(user) {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+            const docSnap = await getDoc(userRef);
+
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                if (userData.role === 'teacher') {
+                    studentView.style.display = 'none';
+                    teacherView.style.display = 'block';
+                    document.getElementById('teacher-dashboard').style.display = 'block';
+                    document.getElementById('teacher-welcome').innerText = `Welcome back, Professor ${userData.username}!`;
+                    fetchAndDisplayStudents();
+                    fetchAndDisplayQuestions();
+                    renderTeacherTimetable();
+                } else {
+                    teacherView.style.display = 'none';
+                    studentView.style.display = 'block';
+                    document.getElementById('dashboard').style.display = 'block';
+                    updateDashboard(userData);
+                }
+            } else {
+                console.log("No such document! Might be a new user in an inconsistent state.");
+                showToast("User data not found. Logging out.", "error");
+                handleLogout(); // Log out to prevent being in a broken state.
+            }
+        }
+        
+        async function fetchAndDisplayStudents() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const usersRef = collection(db, `artifacts/${appId}/users`);
+            const q = query(usersRef, where("role", "==", "student"));
+            const querySnapshot = await getDocs(q);
+            const teacherRosterBody = document.getElementById('teacher-roster-body');
+            teacherRosterBody.innerHTML = ''; // Clear previous entries
+            
+            let students = [];
+            querySnapshot.forEach((doc) => {
+                students.push(doc.data());
+            });
+
+            updateTeacherDashboardStats(students);
+
+            if (students.length === 0) {
+                teacherRosterBody.innerHTML = '<tr><td colspan="5">No students have signed up yet.</td></tr>';
+                return;
+            }
+
+            students.forEach((student) => {
+                const lastActive = student.lastActive ? new Date(student.lastActive.seconds * 1000).toLocaleDateString() : 'Never';
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.username}</td>
+                    <td>${student.level}</td>
+                    <td>${student.xp}</td>
+                    <td>${student.coins}</td>
+                    <td>${lastActive}</td>
+                `;
+                row.addEventListener('click', () => showStudentPreview(student));
+                teacherRosterBody.appendChild(row);
+            });
+        }
+
+        function showStudentPreview(studentData) {
+            const modal = document.getElementById('student-preview-modal');
+            document.getElementById('student-preview-name').textContent = studentData.username;
+            const rank = ["Page", "Squire", "Knight", "Baron", "Duke", "Royal Scholar"][Math.min(studentData.level - 1, 5)];
+            document.getElementById('student-preview-level').textContent = `Level ${studentData.level} ${rank}`;
+            
+            const xpForNextLevel = studentData.level * 100;
+            const xpPercentage = (studentData.xp / xpForNextLevel) * 100;
+            document.getElementById('student-preview-xp').style.width = `${xpPercentage}%`;
+            
+            document.getElementById('student-preview-coins').innerHTML = `${studentData.coins} <i class="fas fa-coins"></i> Royal Coins`;
+            document.getElementById('student-preview-classes').textContent = studentData.classesWatched || 0;
+            document.getElementById('student-preview-quizzes').textContent = studentData.quizzesAttempted || 0;
+
+            modal.style.display = 'block';
+        }
+
+        
+        function updateTeacherDashboardStats(students) {
+            const totalStudents = students.length;
+            document.getElementById('total-students-stat').textContent = totalStudents;
+
+            if (totalStudents > 0) {
+                const totalLevels = students.reduce((sum, student) => sum + student.level, 0);
+                const averageLevel = (totalLevels / totalStudents).toFixed(1);
+                document.getElementById('average-level-stat').textContent = averageLevel;
+            } else {
+                 document.getElementById('average-level-stat').textContent = '0';
+            }
+        }
+
+        async function fetchAndDisplayQuestions() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const questionsRef = collection(db, `artifacts/${appId}/quizzes`);
+            const querySnapshot = await getDocs(questionsRef);
+            const questionListBody = document.getElementById('question-list-body');
+            questionListBody.innerHTML = ''; // Clear previous entries
+
+            if (querySnapshot.empty) {
+                questionListBody.innerHTML = '<tr><td colspan="3">No questions added yet. Create one!</td></tr>';
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const question = doc.data();
+                const row = `
+                    <tr>
+                        <td>${question.subject}</td>
+                        <td>${question.question.substring(0, 30)}...</td>
+                        <td>
+                            <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: var(--royal-red);" onclick="confirmDeleteQuestion('${doc.id}')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+                questionListBody.innerHTML += row;
+            });
+        }
+        
+        async function addNewQuestion(questionData) {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const questionsRef = collection(db, `artifacts/${appId}/quizzes`);
+            
+            try {
+                await addDoc(questionsRef, {
+                    ...questionData,
+                    createdAt: new Date(),
+                    createdBy: auth.currentUser.uid
+                });
+                showToast("Question added successfully!", "success");
+                fetchAndDisplayQuestions();
+                addQuestionModal.style.display = 'none';
+                addQuestionForm.reset();
+            } catch (error) {
+                console.error("Error adding question: ", error);
+                showToast("Failed to add question.", "error");
+            }
+        }
+        
+        // Replaced confirm() with a custom modal
+        function confirmDeleteQuestion(questionId) {
+            const confirmModal = document.getElementById('confirm-modal');
+            confirmModal.style.display = 'block';
+
+            const yesBtn = document.getElementById('confirm-yes-btn');
+            const noBtn = document.getElementById('confirm-no-btn');
+
+            const handleYes = async () => {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const questionRef = doc(db, `artifacts/${appId}/quizzes`, questionId);
+                try {
+                    await deleteDoc(questionRef);
+                    showToast("Question deleted successfully!", "success");
+                    fetchAndDisplayQuestions();
+                } catch (error) {
+                    console.error("Error deleting question: ", error);
+                    showToast("Failed to delete question.", "error");
+                }
+                confirmModal.style.display = 'none';
+                cleanup();
+            };
+            
+            const handleNo = () => {
+                confirmModal.style.display = 'none';
+                cleanup();
+            };
+            
+            const cleanup = () => {
+                yesBtn.removeEventListener('click', handleYes);
+                noBtn.removeEventListener('click', handleNo);
+            };
+
+            yesBtn.addEventListener('click', handleYes, { once: true });
+            noBtn.addEventListener('click', handleNo, { once: true });
+        }
+        
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                showToast("You have been logged out.", "info");
+            } catch (error) {
+                console.error("Logout Error:", error);
+                showToast("Failed to log out.", "error");
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+
+        if(authForm) {
+            authForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const username = document.getElementById('username').value;
+                const role = document.querySelector('.user-type.active').dataset.type;
+
+                setLoading(true);
+
+                try {
+                    if (isLoginMode) {
+                        // --- Sign In ---
+                        await signInWithEmailAndPassword(auth, email, password);
+                        showToast("Login Successful! Welcome back.", "success");
+                        celebrate();
+                    } else {
+                        // --- Sign Up ---
+                        if (!username) {
+                            showToast("Please enter a username.", "error");
+                            setLoading(false);
+                            return;
+                        }
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                        await setupUserDocument(userCredential.user, username, role);
+                        showToast("Account created successfully! Welcome to the kingdom.", "success");
+                        celebrate();
+                    }
+                } catch (error) {
+                    console.error("Firebase Auth Error:", error); // Log the detailed error
+                    showToast(formatAuthError(error.code), "error");
+                } finally {
+                    setLoading(false);
+                }
+            });
+        }
+        
+        if(logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleLogout();
+            });
+        }
+        
+        const startLearningBtn = document.getElementById('start-learning');
+        if(startLearningBtn) {
+            startLearningBtn.addEventListener('click', async () => {
+                 const user = auth.currentUser;
+                 if (!user) return;
+                 
+                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                 const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+                 try {
+                       await updateDoc(userRef, {
+                           xp: increment(10),
+                           coins: increment(5),
+                           lastActive: new Date()
+                       });
+                       showToast("+10 XP and +5 Coins!", "success");
+                       fetchUserData(user); // Re-fetch to update dashboard
+                 } catch (error) {
+                       console.error("Error updating XP/Coins: ", error);
+                       showToast("Could not update progress.", "error");
+                 }
+            });
+        }
+
+        // Teacher Dashboard Event Listeners
+        if(addQuestionBtn) {
+            addQuestionBtn.addEventListener('click', () => {
+                addQuestionModal.style.display = 'block';
+            });
+        }
+        
+        if(addQuestionForm) {
+            addQuestionForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const title = document.getElementById('question-title').value;
+                const question = document.getElementById('question-text').value;
+                const subject = document.getElementById('question-subject').value;
+                const optionTexts = document.querySelectorAll('.option-text');
+                const correctAnswerIndex = document.querySelector('input[name="correct-answer"]:checked').value;
+                
+                const options = Array.from(optionTexts).map((input, index) => ({
+                    text: input.value,
+                    id: `option${index}`
+                }));
+                
+                const correctAnswer = `option${correctAnswerIndex}`;
+                
+                const questionData = {
+                    title,
+                    question,
+                    subject,
+                    options,
+                    correctAnswer
+                };
+                
+                await addNewQuestion(questionData);
+            });
+        }
+        
+        // --- UI AND HELPER FUNCTIONS ---
+
+        function updateDashboard(userData) {
+            const xpForNextLevel = userData.level * 100;
+            const xpPercentage = (userData.xp / xpForNextLevel) * 100;
+
+            const ranks = ["Page", "Squire", "Knight", "Baron", "Duke", "Royal Scholar"];
+            const rank = ranks[Math.min(userData.level - 1, ranks.length - 1)];
+
+            document.getElementById('welcome-user').innerText = `Welcome, ${userData.username}!`;
+            document.getElementById('dashboard-username').innerText = `${userData.username}`;
+            document.getElementById('dashboard-level').innerText = `Level ${userData.level} ${rank}`;
+            document.getElementById('dashboard-coins').innerHTML = `${userData.coins} <i class="fas fa-coins"></i> Royal Coins`;
+            document.getElementById('dashboard-xp-fill').style.width = `${xpPercentage}%`;
+        }
+
+        function setAuthMode(isLogin) {
+            isLoginMode = isLogin;
+            if(loginToggle && signupToggle && usernameGroup && authBtnText) {
+                loginToggle.classList.toggle('active', isLogin);
+                signupToggle.classList.toggle('active', !isLogin);
+                usernameGroup.style.display = isLogin ? 'none' : 'block';
+                document.getElementById('username').required = !isLogin;
+                authBtnText.textContent = isLogin ? 'Enter the Kingdom' : 'Create Your Account';
+                document.querySelector('.login-logo p').textContent = isLogin ? 'Royal Gamified Learning Platform' : 'Join the Kingdom';
+            }
+        }
+        
+        if(loginToggle) loginToggle.addEventListener('click', () => setAuthMode(true));
+        if(signupToggle) signupToggle.addEventListener('click', () => setAuthMode(false));
+        
+        document.querySelectorAll('.user-type').forEach(type => {
+            type.addEventListener('click', () => {
+                document.querySelectorAll('.user-type').forEach(t => t.classList.remove('active'));
+                type.classList.add('active');
+            });
+        });
+
+        function setLoading(isLoading) {
+            if(authBtn && authBtnText && authBtnLoader){
+                authBtn.disabled = isLoading;
+                authBtnText.style.display = isLoading ? 'none' : 'block';
+                authBtnLoader.style.display = isLoading ? 'block' : 'none';
+            }
+        }
+
+        function formatAuthError(errorCode) {
+            switch (errorCode) {
+                case 'auth/user-not-found':
+                case 'auth/wrong-password':
+                    return 'Invalid email or password. Please try again.';
+                case 'auth/email-already-in-use':
+                    return 'This email is already registered. Please login.';
+                case 'auth/weak-password':
+                    return 'Password should be at least 6 characters long.';
+                case 'auth/invalid-email':
+                    return 'Please enter a valid email address.';
+                case 'auth/api-key-not-valid':
+                     return 'The API Key is not valid. Please check your Firebase configuration.';
+                default:
+                    return 'An unexpected error occurred. Please try again.';
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toast-container');
+            if(!toastContainer) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icons = {
+                info: 'fa-circle-info',
+                success: 'fa-check-circle',
+                error: 'fa-triangle-exclamation'
+            };
+
+            toast.innerHTML = `<i class="fas ${icons[type]}"></i> <p>${message}</p>`;
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        document.querySelectorAll('.interactive-element').forEach(el => {
+            el.addEventListener('click', () => {
+                const message = el.dataset.message || "A magical event occurred!";
+                showToast(message, "info");
+            });
+        });
+
+        function celebrate() {
+            if (!fallAnimationAdded) {
+                const style = document.createElement('style');
+                style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }`;
+                document.head.appendChild(style);
+                fallAnimationAdded = true;
+            }
+
+            const colors = ['#ffd700', '#4169e1', '#c41e3a', '#2e8b57', '#7851a9'];
+            for (let i = 0; i < 40; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = `${-20 + Math.random() * -80}px`;
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = confetti.style.width;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.opacity = '0.8';
+                confetti.style.zIndex = '9999';
+                confetti.style.animation = `fall ${Math.random() * 2 + 3}s ${Math.random() * 2}s linear forwards`;
+                document.body.appendChild(confetti);
+            }
+        }
+
+        function createParticles() {
+            const background = document.getElementById('background-animation');
+            if(!background) return;
+            const colors = ['#7851a9', '#4169e1', '#ffd700', '#c41e3a', '#2e8b57'];
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                background.appendChild(particle);
+            }
+        }
+
+        // --- DYNAMIC QUIZ LOGIC ---
+
+        let currentQuizQuestions = [];
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let userAnswers = [];
+
+        const quizModal = document.getElementById('quiz-modal');
+        const quizQuestionArea = document.getElementById('quiz-question-area');
+        const quizSummaryArea = document.getElementById('quiz-summary-area');
+        const modalTitle = quizQuestionArea.querySelector('h2');
+        const modalQuestion = quizQuestionArea.querySelector('p');
+        const modalOptions = quizQuestionArea.querySelector('.options');
+        const playGameBtn = document.getElementById('play-game-btn');
+        const closeQuizBtn = quizModal.querySelector('.close-btn');
+
+        const defaultQuestions = [
+            { id: 'gk1', title: 'General Knowledge', question: 'What is the capital of Japan?', options: [ { id: 'option0', text: 'Beijing' }, { id: 'option1', text: 'Seoul' }, { id: 'option2', text: 'Tokyo' } ], correctAnswer: 'option2' },
+            { id: 'gk2', title: 'Science', question: 'What planet is known as the Red Planet?', options: [ { id: 'option0', text: 'Mars' }, { id: 'option1', text: 'Jupiter' }, { id: 'option2', text: 'Venus' } ], correctAnswer: 'option0' },
+        ];
+
+        async function startQuiz() {
+            const user = auth.currentUser;
+            if(!user) return;
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+            await updateDoc(userRef, { quizzesAttempted: increment(1) });
+
+            let allQuestions = [...defaultQuestions];
+            try {
+                
+                const questionsRef = collection(db, `artifacts/${appId}/quizzes`);
+                const querySnapshot = await getDocs(questionsRef);
+                
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        const questionData = doc.data();
+                        allQuestions.push({
+                            id: doc.id,
+                            title: questionData.title,
+                            question: questionData.question,
+                            options: questionData.options,
+                            correctAnswer: questionData.correctAnswer
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error("Could not fetch Firestore questions, using default questions only.", error);
+            }
+            
+            if (allQuestions.length === 0) {
+                showToast("No quiz questions available yet.", "error");
+                return;
+            }
+            
+            currentQuizQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 5);
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            userAnswers = [];
+            
+            quizQuestionArea.style.display = 'block';
+            quizSummaryArea.style.display = 'none';
+            document.getElementById('quiz-review-area').innerHTML = '';
+
+            loadQuestion(currentQuestionIndex);
+            quizModal.style.display = 'block';
+        }
+
+        function loadQuestion(index) {
+            const q = currentQuizQuestions[index];
+            modalTitle.textContent = q.title;
+            modalQuestion.textContent = q.question;
+            modalOptions.innerHTML = ''; 
+            
+            q.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option.text;
+                button.setAttribute('data-answer', option.id);
+                button.addEventListener('click', handleAnswer);
+                modalOptions.appendChild(button);
+            });
+        }
+
+        async function handleAnswer(event) {
+            const selectedAnswerId = event.target.getAttribute('data-answer');
+            const selectedAnswerText = event.target.textContent;
+            const user = auth.currentUser;
+            const currentQuestion = currentQuizQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswerId === currentQuestion.correctAnswer;
+
+             userAnswers.push({
+                 question: currentQuestion.question,
+                 selected: selectedAnswerText,
+                 correct: currentQuestion.options.find(opt => opt.id === currentQuestion.correctAnswer).text,
+                 isCorrect: isCorrect
+             });
+
+            modalOptions.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+            
+            if (isCorrect) {
+                correctAnswers++;
+                showToast('Correct! 👑 You earned 100 Royal Coins and 20 XP!', 'success');
+                if (user) {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+                    try {
+                        await updateDoc(userRef, {
+                            xp: increment(20),
+                            coins: increment(100),
+                            lastActive: new Date()
+                        });
+                        fetchUserData(user); 
+                    } catch (error) {
+                        console.error("Error updating score:", error);
+                        showToast("Could not save your score.", "error");
+                    }
+                }
+            } else {
+                wrongAnswers++;
+                showToast('Not quite! Keep trying!', 'error');
+            }
+            
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < currentQuizQuestions.length) {
+                    loadQuestion(currentQuestionIndex);
+                } else {
+                    document.getElementById('correct-score').textContent = correctAnswers;
+                    document.getElementById('wrong-score').textContent = wrongAnswers;
+                    
+                    const reviewArea = document.getElementById('quiz-review-area');
+                    reviewArea.innerHTML = '<h3>Review Your Answers:</h3>';
+                    userAnswers.forEach(ans => {
+                        const resultHtml = `
+                            <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--royal-purple);">
+                                <p><strong>Q:</strong> ${ans.question}</p>
+                                <p><strong>Your Answer:</strong> <span style="color: ${ans.isCorrect ? 'var(--royal-green)' : 'var(--royal-red)'};">${ans.selected} ${ans.isCorrect ? '✔' : '✖'}</span></p>
+                                ${!ans.isCorrect ? `<p><strong>Correct Answer:</strong> ${ans.correct}</p>` : ''}
+                            </div>
+                        `;
+                        reviewArea.innerHTML += resultHtml;
+                    });
+
+
+                    quizQuestionArea.style.display = 'none';
+                    quizSummaryArea.style.display = 'block';
+
+                    showToast(`Quiz finished! You got ${correctAnswers} correct.`, 'info');
+                    
+                    setTimeout(() => {
+                         quizModal.style.display = 'none';
+                    }, 8000);
+                }
+            }, 1500);
+        }
+
+        if(playGameBtn) playGameBtn.addEventListener('click', startQuiz);
+        
+        // --- TIMETABLE LOGIC ---
+
+        function populateSelectors() {
+            const studentGradeSelector = document.getElementById('grade-selector');
+            const teacherGradeSelector = document.getElementById('class-grade');
+            const studentSubjectSelector = document.getElementById('subject-selector');
+            
+            studentGradeSelector.innerHTML = '<option value="">Select Your Grade</option>';
+            teacherGradeSelector.innerHTML = '';
+            studentSubjectSelector.innerHTML = '<option value="All">All Subjects</option>';
+            
+            for(let i = 1; i <= 12; i++) {
+                const option = `<option value="${i}">Grade ${i}</option>`;
+                studentGradeSelector.innerHTML += option;
+                teacherGradeSelector.innerHTML += option;
+            }
+
+            const subjects = Object.keys(syllabusData);
+            subjects.forEach(subject => {
+                const option = `<option value="${subject}">${subject}</option>`;
+                studentSubjectSelector.innerHTML += option;
+            });
+        }
+
+        function renderStudentTimetable(grade, subject = 'All') {
+            const container = document.getElementById('student-timetable');
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            let html = '';
+
+            let filteredClasses = classScheduleData.filter(c => c.grade == grade);
+            if (subject !== 'All') {
+                filteredClasses = filteredClasses.filter(c => c.subject === subject);
+            }
+
+            if(filteredClasses.length === 0 && grade) {
+                 container.innerHTML = `<p>No ${subject === 'All' ? '' : subject} classes scheduled for this grade yet. Check back later!</p>`;
+                 return;
+            } else if (!grade) {
+                 container.innerHTML = '<p>Please select your grade to see the class schedule.</p>';
+                 return;
+            }
+            
+            days.forEach(day => {
+                html += `<div class="timetable-day"><h4>${day}</h4>`;
+                const classesForDay = filteredClasses.filter(c => c.day === day);
+                if (classesForDay.length > 0) {
+                    classesForDay.forEach(c => {
+                        html += `<div class="timetable-class"><a href="#" data-class-id="${c.id}" data-url="${c.url}"><strong>${c.subject}:</strong><br>${c.title}</a></div>`;
+                    });
+                } else {
+                    html += '<p style="font-size: 0.9rem; color: var(--text-muted);">No classes today.</p>';
+                }
+                html += '</div>';
+            });
+            container.innerHTML = html;
+
+            // Add event listeners for class links
+            container.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', handleClassWatch);
+            });
+        }
+        
+        async function handleClassWatch(e) {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const classId = e.currentTarget.dataset.classId;
+            const url = e.currentTarget.dataset.url;
+            
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userRef = doc(db, `artifacts/${appId}/users`, user.uid);
+            const docSnap = await getDoc(userRef);
+
+            if(docSnap.exists()){
+                const userData = docSnap.data();
+                if (userData.watchedClassIds && userData.watchedClassIds.includes(classId)) {
+                     showToast("You've already earned credit for this class!", 'info');
+                } else {
+                    await updateDoc(userRef, {
+                        classesWatched: increment(1),
+                        xp: increment(15),
+                        coins: increment(10),
+                        watchedClassIds: arrayUnion(classId)
+                    });
+                    showToast("Great job watching a class! +15XP & +10 Coins!", "success");
+                    fetchUserData(user);
+                }
+            }
+            window.open(url, '_blank');
+        }
+
+         function renderTeacherTimetable() {
+            const container = document.getElementById('teacher-timetable');
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            let html = '';
+            
+            days.forEach(day => {
+                html += `<div class="timetable-day"><h4>${day}</h4>`;
+                const classesForDay = classScheduleData.filter(c => c.day === day).sort((a,b) => a.grade - b.grade);
+                if (classesForDay.length > 0) {
+                    classesForDay.forEach(c => {
+                        html += `<div class="timetable-class"><strong>Grade ${c.grade} ${c.subject}:</strong><br><a href="${c.url}" target="_blank">${c.title}</a></div>`;
+                    });
+                } else {
+                    html += '<p style="font-size: 0.9rem; color: var(--text-muted);">No classes today.</p>';
+                }
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        const studentGradeSelector = document.getElementById('grade-selector');
+        const studentSubjectSelector = document.getElementById('subject-selector');
+
+        function updateStudentTimetableFilter() {
+             const selectedGrade = studentGradeSelector.value;
+             const selectedSubject = studentSubjectSelector.value;
+             renderStudentTimetable(selectedGrade, selectedSubject);
+        }
+
+        studentGradeSelector.addEventListener('change', updateStudentTimetableFilter);
+        studentSubjectSelector.addEventListener('change', updateStudentTimetableFilter);
+
+        document.getElementById('upload-class-form').addEventListener('submit', (e) => {
+             e.preventDefault();
+             const newClass = {
+                id: classScheduleData.length + 1,
+                grade: document.getElementById('class-grade').value,
+                day: document.getElementById('class-day').value,
+                subject: document.getElementById('class-subject').value,
+                title: document.getElementById('class-title').value,
+                url: document.getElementById('class-video-url').value,
+             };
+             classScheduleData.push(newClass);
+             renderTeacherTimetable();
+             showToast("Class uploaded successfully!", "success");
+             document.getElementById('upload-class-modal').style.display = 'none';
+             e.target.reset();
+        });
+
+
+        // --- NEW MODAL LISTENERS ---
+        const studentSubjectModal = document.getElementById('student-subject-modal');
+        document.querySelectorAll('#student-view .subject-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const subject = e.currentTarget.dataset.subject;
+                studentSubjectModal.style.display = 'block';
+                document.getElementById('student-subject-title').innerText = subject;
+                
+                const syllabusContent = document.getElementById('student-syllabus-content');
+                const selectedGrade = document.getElementById('grade-selector').value;
+
+                if (!selectedGrade) {
+                    syllabusContent.innerHTML = '<p>Please select your grade from the timetable section to view the syllabus.</p>';
+                } else {
+                    const topics = syllabusData[subject]?.[selectedGrade] || ["Syllabus for this grade is coming soon!"];
+                    syllabusContent.innerHTML = `<h4>Grade ${selectedGrade} Syllabus</h4><ul>` + topics.map(topic => `<li>${topic}</li>`).join('') + '</ul>';
+                }
+            });
+        });
+
+        const teacherSubjectModal = document.getElementById('teacher-subject-modal');
+        document.querySelectorAll('#teacher-view .subject-manage-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const subject = e.currentTarget.dataset.subject;
+                teacherSubjectModal.style.display = 'block';
+                document.getElementById('teacher-subject-title').innerText = `Manage ${subject}`;
+                
+                const syllabusContent = document.getElementById('teacher-syllabus-content');
+                const subjectSyllabus = syllabusData[subject];
+                let html = '';
+
+                if (subjectSyllabus) {
+                    for (const grade in subjectSyllabus) {
+                        html += `<h4 style="color: var(--royal-blue); margin-top: 1rem;">Grade ${grade}</h4><ul>`;
+                        html += subjectSyllabus[grade].map(topic => `<li>${topic}</li>`).join('');
+                        html += `</ul>`;
+                    }
+                } else {
+                    html = '<p>No syllabus defined for this subject yet.</p>';
+                }
+                syllabusContent.innerHTML = html;
+            });
+        });
+
+        const uploadClassModal = document.getElementById('upload-class-modal');
+        document.getElementById('upload-class-btn').addEventListener('click', () => {
+            uploadClassModal.style.display = 'block';
+        });
+
+        document.getElementById('student-search-bar').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#teacher-roster-body tr');
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                if(name.includes(searchTerm)){
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+        // Generic modal close logic
+        document.querySelectorAll('.modal .close-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.modal').style.display = 'none';
+            });
+        });
+
+
+        window.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        });
+
+        window.confirmDeleteQuestion = confirmDeleteQuestion;
+
+        // --- INITIALIZATION ---
+
+        function initializeAppAndAuth() {
+            app = initializeApp(finalFirebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            
+            setupAuthListener();
+            initialAuth();
+            populateSelectors();
+            return true;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setAuthMode(true);
+            initializeAppAndAuth();
+        });
+    </script>
+</body>
+</html>
+

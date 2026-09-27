@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain, Fun & BOOM! - Gamified Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --royal-purple: #6a4c93;
+            --royal-blue: #1982c4;
+            --royal-gold: #ffca3a;
+            --royal-red: #ff595e;
+            --royal-green: #8ac926;
+            --dark-blue: #0a2342;
+            --light-bg: #f0f7ff;
+        }
+
+        body {
+            background: var(--light-bg);
+            color: var(--dark-blue);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--royal-blue), var(--royal-purple));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--royal-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%231982c4" x="0" y="0" width="100" height="100"/><path fill="%230a2342" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>') center/cover;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--royal-blue), var(--royal-purple));
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--royal-gold);
+            color: var(--dark-blue);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--royal-purple);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--royal-gold);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--royal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--royal-purple);
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-purple) 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-logo p {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--royal-gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(to right, var(--royal-gold), var(--royal-red));
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: white;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-btn.apple {
+            background: #000;
+            color: white;
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: var(--royal-gold);
+            text-decoration: none;
+        }
+
+        /* Subjects Section */
+        .subjects {
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom right, #e0f0ff, #c8e6ff);
+            text-align: center;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .subject-content {
+            padding: 1.5rem;
+        }
+
+        .subject-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--royal-purple);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--royal-gold);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .login-logo h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Brain, Fun & BOOM!</span>
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Subjects</a>
+                <a href="#">Games</a>
+                <a href="#">Progress</a>
+                <a href="#">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Making Learning Fun for Rural Students</h1>
+        <p>An interactive gamified platform for STEM education with offline access and multilingual support</p>
+        <a href="#login" class="btn">Start Learning Now <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card floating">
+                <i class="fas fa-gamepad"></i>
+                <h3>Interactive Games</h3>
+                <p>Engaging educational games that make learning STEM subjects fun and exciting.</p>
+            </div>
+            <div class="feature-card floating">
+                <i class="fas fa-globe"></i>
+                <h3>Multilingual Support</h3>
+                <p>Content available in multiple languages to cater to diverse rural communities.</p>
+            </div>
+            <div class="feature-card floating">
+                <i class="fas fa-wifi"></i>
+                <h3>Offline Access</h3>
+                <p>Learn even without internet connectivity - perfect for areas with limited access.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section" id="login">
+        <div class="login-container">
+            <div class="login-logo">
+                <h1>Brain, Fun and BOOM!</h1>
+                <p>Gamified Learning for Rural Education</p>
+            </div>
+            
+            <div class="form-container">
+                <h2>Create an account</h2>
+                <p style="text-align: center; margin-bottom: 20px; color: rgba(255, 255, 255, 0.9);">
+                    Enter your email to sign up for this app
+                </p>
+                
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="email@domain.com">
+                </div>
+                
+                <button class="btn-login">Continue</button>
+                
+                <div class="divider">
+                    <span>Or</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn">
+                        <i class="fab fa-google" style="color: #DB4437;"></i>
+                        Continue with Google
+                    </button>
+                    <button class="social-btn apple">
+                        <i class="fab fa-apple"></i>
+                        Continue with Apple
+                    </button>
+                </div>
+                
+                <div class="terms">
+                    By clicking continue, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects">
+        <h2 class="section-title">STEM Subjects</h2>
+        <div class="subjects-grid">
+            <div class="subject-card">
+                <div style="background: var(--royal-blue); height: 180px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-calculator" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <div class="subject-content">
+                    <h3>Mathematics</h3>
+                    <p>Fun games to learn algebra, geometry, and more!</p>
+                </div>
+            </div>
+            <div class="subject-card">
+                <div style="background: var(--royal-green); height: 180px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-atom" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <div class="subject-content">
+                    <h3>Science</h3>
+                    <p>Explore physics, chemistry, and biology through interactive experiments.</p>
+                </div>
+            </div>
+            <div class="subject-card">
+                <div style="background: var(--royal-purple); height: 180px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-laptop-code" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <div class="subject-content">
+                    <h3>Technology</h3>
+                    <p>Learn coding and technology skills with game-based challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Brain, Fun & BOOM!</h3>
+                <p>A gamified learning platform designed to enhance STEM education in rural areas through interactive games and offline access.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color: white;">Home</a></p>
+                <p><a href="#" style="color: white;">Subjects</a></p>
+                <p><a href="#" style="color: white;">Games</a></p>
+                <p><a href="#" style="color: white;">About Us</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> contact@brainfunboom.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> Government of Odisha, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Brain, Fun & BOOM! | Gamified Learning Platform</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for feature cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.3}s`;
+            });
+        });
+    </script>
+</body>
+</html>
